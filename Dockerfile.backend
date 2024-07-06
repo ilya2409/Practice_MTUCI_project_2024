@@ -1,0 +1,13 @@
+# Dockerfile.backend
+FROM python:3.10.12
+
+WORKDIR /app
+
+COPY requirements.txt .
+RUN pip install -r requirements.txt
+
+COPY config.py create_db.py hh_parser.py /app/
+
+RUN python create_db.py
+
+CMD ["python", "hh_parser.py"]
